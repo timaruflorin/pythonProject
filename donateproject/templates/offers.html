@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Off-R</title>
+</head>
+<body>
+
+<style>
+    #hello-msg {
+        font-size: 18px;
+        color: white;
+        margin-right: 15px;
+    }
+</style>
+
+<nav class="navbar fixed-top navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="/"><h1>Off-R</h1></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="/#about_us"><h4>About Off-R</h4></a></li>
+            <li class="nav-item"><a class="nav-link" href="/#contact"><h4>Contact</h4></a></li>
+            <li class="nav-item"><a class="nav-link" href="/my_offers/{{request.user}}"><h4>My offers</h4></a></li>
+        </ul>
+    </div>
+
+    <span id="hello-msg"><h4>{{request.user}}</h4></span>
+    <span><a href="/logout"><h4>Logout</h4></a></span>
+
+</nav>
+
+<style>
+    .picture {
+        max-width: 150px;
+        max-height: 100px;
+        margin: 0 auto;
+        text-align: center;
+
+    }
+</style>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body" style="margin-top: 100px; margin-bottom: 30px; background-color: lavenderblush">
+            <h5>Off-Rs<a class="btn btn-lg btn-success" style="margin-left:790px" href="/add_offer">Add a new offer</a></h5>
+        </div>
+        <div class="card card-body">
+            <table class="table">
+                <tr style="background-color: lavenderblush">
+                    <th></th>
+                    <th><i class="fa fa-space-shuttle"></i> Offer</th>
+                    <th><i class="fa fa-edit"></i> Author</th>
+                    <th><i class="fa fa-calendar"></i> Posted at</th>
+                    <th><i class="fa fa-location-arrow"></i> Location</th>
+                    <th></th>
+                </tr>
+
+                {% for i in offers %}
+                <tr>
+                    <td><a href="specific_offer/{{i.id}}"><img class="picture" src="{{i.picture.url}}"></a></td>
+                    <td>{{i.title}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.created_at}}<a href="login"></a></td>
+                    <td>{{i.address}}</td>
+                    <td><a class="btn btn-sm btn-danger" href="specific_offer/{{i.id}}" style="font-size:15px">View</a>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
+
+{% endblock content %}
